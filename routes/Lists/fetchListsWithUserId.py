@@ -27,10 +27,20 @@ def fetchListsWithUserId():
     if error:
         return jsonify(error), 401
 
+    page = int(request.args.get("page", 1))
+    limit = int(request.args.get("limit", 10))
+    offset = (page - 1) * limit
+    
     # ✅ Query all lists where user_id matches
-    lists = Lists.query.filter_by(user_id=user_id).all()
-
+    total_lists = Lists.query.filter_by(user_id=user_id).count()
+    lists = Lists.query.filter_by(user_id=user_id).offset(offset).limit(limit).all()
     # 🔄 Format the response
-    response = [{"listName": lst.name, "listId": lst.ListId} for lst in lists]
+    response = {
+        "lists": [{"listName": lst.name, "listId": lst.ListId} for lst in lists],
+        "page": page,
+        "limit": limit,
+        "total": total_lists
+    }
+    
 
     return jsonify(response), 200
