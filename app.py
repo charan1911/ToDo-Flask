@@ -1,4 +1,9 @@
 from flask import Flask, request, jsonify
+from flask_cors import CORS
+
+app = Flask(__name__)
+CORS(app)
+
 from Common.db import db 
 from models.user import User
 from routes.auth.signUp import handle_signUp
@@ -16,7 +21,6 @@ from routes.ToDos.editToDosWithToDoId import editToDosWithToDoId
 from routes.ToDos.deleteToDosWithToDoId import deleteToDosWithToDoId
 from routes.ToDos.searchToDosWithZKeyWord import searchToDosWithZKeyWord
 
-app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///todo.db"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 db.init_app(app)

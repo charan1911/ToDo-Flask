@@ -30,5 +30,5 @@ def handle_login(data):
     }
     
     token = jwt.encode(payload, SECRET_KEY, algorithm="HS256")
-    return {"message": "Login Successful","user_id": user.id, "token": token, "payload": payload, "Secret_Key": SECRET_KEY}, 200
+    return {"message": "Login Successful","user_id": user.id, "token": token}, 200
 
