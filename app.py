@@ -20,6 +20,8 @@ from routes.ToDos.fetchToDosWithListId import fetchToDosWithListId
 from routes.ToDos.editToDosWithToDoId import editToDosWithToDoId
 from routes.ToDos.deleteToDosWithToDoId import deleteToDosWithToDoId
 from routes.ToDos.searchToDosWithZKeyWord import searchToDosWithZKeyWord
+from routes.ToDos.checkToDosWithToDoId import checkToDosWithToDoId
+from routes.ToDos.unCheckToDosWithToDoId import unCheckToDosWithToDoId
 
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///todo.db"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
@@ -33,6 +35,14 @@ with app.app_context():
 @app.route("/search_todos", methods=["GET"])
 def search_todos():
     return searchToDosWithZKeyWord()
+
+@app.route("/uncheck_todos", methods=["PUT"])
+def uncheck_todos():
+    return unCheckToDosWithToDoId()
+
+@app.route("/check_todos", methods=['PUT'])
+def check_todos():
+    return checkToDosWithToDoId()
 
 @app.route("/delete_todos",methods=["DELETE"])
 def delete_todos():
