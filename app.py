@@ -64,13 +64,13 @@ def delete_lists():
 def edit_lists():
     return editListsWithListId()
     
+@app.route("/fetch_lists", methods=["GET"])
+def fetch_lists():
+    return fetchListsWithUserId()
+
 @app.route("/create_lists", methods=["POST"])
 def create_lists():
     return createListsWithUserId()
-    
-@app.route("/fetch-lists", methods=["GET"])
-def fetch_lists():
-    return fetchListsWithUserId()
 #-------------------------------------------------------------------------------------
 
 @app.route("/signup", methods=["POST"])
